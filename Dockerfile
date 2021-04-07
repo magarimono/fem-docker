@@ -18,6 +18,7 @@ ARG CONDA_VERSION=py38_4.9.2
 ARG CONDA_MD5=122c8c9beb51e124ab32a0fa6426c656
 
 ENV PATH=/opt/conda/bin:$PATH
+CMD [ "/bin/bash" ]
 
 RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-${CONDA_VERSION}-Linux-x86_64.sh -O miniconda.sh && \
     echo "${CONDA_MD5}  miniconda.sh" > miniconda.md5 && \
