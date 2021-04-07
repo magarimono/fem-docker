@@ -17,6 +17,8 @@ RUN pip3 install --no-cache --upgrade pip && \
 ARG CONDA_VERSION=py38_4.9.2
 ARG CONDA_MD5=122c8c9beb51e124ab32a0fa6426c656
 
+ENV PATH=/opt/conda/bin:$PATH
+
 RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-${CONDA_VERSION}-Linux-x86_64.sh -O miniconda.sh && \
     echo "${CONDA_MD5}  miniconda.sh" > miniconda.md5 && \
     if ! md5sum --status -c miniconda.md5; then exit 1; fi && \
@@ -29,7 +31,8 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-${CONDA_VERSION}
     find /opt/conda/ -follow -type f -name '*.a' -delete && \
     find /opt/conda/ -follow -type f -name '*.js.map' -delete && \
     /opt/conda/bin/conda clean -afy \
-    && conda config --set always_yes yes \
+
+RUN conda config --set always_yes yes \
     && conda config --add channels conda-forge \
     && conda install --freeze-installed \
         nomkl \
