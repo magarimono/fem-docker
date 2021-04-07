@@ -14,6 +14,26 @@ RUN pip3 install --no-cache --upgrade pip && \
     pip3 install --no-cache pyvista && \
     pip3 install --no-cache pyvirtualdisplay
 
+RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh \
+    && /bin/bash ~/miniconda.sh -b -p /opt/conda \
+    && rm ~/miniconda.sh \
+    && echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc \
+    && echo "conda activate base" >> ~/.bashrc \
+    && conda config --set always_yes yes \
+    && conda config --add channels conda-forge \
+    && conda install --freeze-installed \
+        nomkl \
+        sfepy=UNKNOWN \
+        mayavi \
+        scikit-umfpack \
+        ipyevents \
+        ipywidgets \
+        itkwidgets \
+        jupyterlab \
+        notebook \
+        "nodejs>=10.0.0"\
+        tini
+
 # create user with a home directory
 ARG NB_USER
 ARG NB_UID
