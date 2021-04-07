@@ -14,6 +14,8 @@ RUN pip3 install --no-cache --upgrade pip && \
     pip3 install --no-cache pyvista && \
     pip3 install --no-cache pyvirtualdisplay
 
+RUN ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh
+
 RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh \
     && /bin/bash ~/miniconda.sh -b -p /opt/conda \
     && rm ~/miniconda.sh \
